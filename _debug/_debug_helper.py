@@ -25,9 +25,9 @@ class __DebugHelper:
             model=HeadHunterVacancyModel,
         )
         vacancy_entity = vacancy_processor.do_process()
-        print(vacancy_entity["published_at"])
+        # print(vacancy_entity["published_at"])
         # pprint(vacancy_entity)
-        # tg_bot.send_vacancy_message(vacancy_entity)
+        tg_bot.moderate_publication(vacancy_entity)
 
     def get_vacancy_from_file(self):
         vacancies_path = r"C:\Users\danii\Desktop\Programming\jobs-notifier\_debug\hh_vacancies_pack.json"

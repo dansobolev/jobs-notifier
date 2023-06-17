@@ -18,14 +18,14 @@ from telegram_bot.bot import tg_bot
 def vacancy_loader_job():
     hh_api_client = HeadHunterAPIClient()
     vacancies = hh_api_client.find_vacancies()
-    for vacancy_content in vacancies:
+    for vacancy_content in vacancies[::-1]:
         vacancy_processor = HeadHunterVacancyProcessor(
             content=vacancy_content,
             parser=HeadHunterVacancyParser,
             model=HeadHunterVacancyModel,
         )
         vacancy_entity = vacancy_processor.do_process()
-        tg_bot.send_vacancy_message(vacancy_entity)
+        tg_bot.moderate_publication(vacancy_entity)
         time.sleep(1)
         print("Вакансия обработана")
 
