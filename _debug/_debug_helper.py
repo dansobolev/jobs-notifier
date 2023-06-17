@@ -16,8 +16,8 @@ class __DebugHelper:
     _hh_api_client = HeadHunterAPIClient()
 
     def load_and_send_to_telegram(self):
-        vacancies_path = r'C:\Users\danii\Desktop\Programming\jobs-notifier\_debug\test_one_vacancy.json'
-        with open(vacancies_path, 'r', encoding='utf-8') as file:
+        vacancies_path = r"C:\Users\danii\Desktop\Programming\jobs-notifier\_debug\test_one_vacancy.json"
+        with open(vacancies_path, "r", encoding="utf-8") as file:
             content = file.read()
         vacancy_processor = HeadHunterVacancyProcessor(
             content=content,
@@ -25,13 +25,13 @@ class __DebugHelper:
             model=HeadHunterVacancyModel,
         )
         vacancy_entity = vacancy_processor.do_process()
-        print(vacancy_entity['published_at'])
+        print(vacancy_entity["published_at"])
         # pprint(vacancy_entity)
         # tg_bot.send_vacancy_message(vacancy_entity)
 
     def get_vacancy_from_file(self):
-        vacancies_path = r'C:\Users\danii\Desktop\Programming\jobs-notifier\_debug\hh_vacancies_pack.json'
-        with open(vacancies_path, 'r', encoding='utf-8') as file:
+        vacancies_path = r"C:\Users\danii\Desktop\Programming\jobs-notifier\_debug\hh_vacancies_pack.json"
+        with open(vacancies_path, "r", encoding="utf-8") as file:
             content = file.read()
         loaded_content = HeadHunterVacancyParser().parse(content)
 
@@ -43,11 +43,11 @@ class __DebugHelper:
 
     def load_pack_of_vacancies_and_save_to_json(self):
         vacancies = self._hh_api_client.find_vacancies()
-        with open('hh_vacancies_pack.json', 'w', encoding='utf-8') as file:
+        with open("hh_vacancies_pack.json", "w", encoding="utf-8") as file:
             file.write(json.dumps(vacancies))
 
     def get_one_vacancy_from_hh(self):
-        external_vacancy_id = '80664458'
+        external_vacancy_id = "80664458"
         vacancy_data = self._hh_api_client.vacancy_read(external_vacancy_id)
         pprint(vacancy_data)
 

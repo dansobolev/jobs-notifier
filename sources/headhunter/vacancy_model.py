@@ -1,6 +1,6 @@
 """Модель данных для вакансий для источника HeadHunter"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 from typing import Any, Dict
 from datetime import datetime
@@ -21,76 +21,78 @@ class HeadHunterVacancyModel(BaseVacancyModel):
     @property
     def title(self):
         """Заголовок вакансии"""
-        return self._data.get('name')
+        return self._data.get("name")
 
     @property
     def schedule(self):
         """График работы"""
-        schedule = self._data.get('schedule') or {}
-        return schedule.get('name')
+        schedule = self._data.get("schedule") or {}
+        return schedule.get("name")
 
     @property
     def employment(self):
         """Тип занятости"""
-        employment = self._data.get('employment') or {}
-        return employment.get('name')
+        employment = self._data.get("employment") or {}
+        return employment.get("name")
 
     @property
     def salary(self) -> str:
         """Информация о зарплате"""
-        result_salary = 'Договорная'
-        _salary = self._data.get('salary')
+        result_salary = "Договорная"
+        _salary = self._data.get("salary")
         if not _salary:
             return result_salary
-        salary_from, salary_to = _salary['from'], _salary['to']
-        currency_symbol = CURRENCY[self._source_id][_salary['currency']]
+        salary_from, salary_to = _salary["from"], _salary["to"]
+        currency_symbol = CURRENCY[self._source_id][_salary["currency"]]
         # gross=True - это зарплата до вычета все налогов
-        is_gross = 'до вычета налогов' if _salary['gross'] else 'на руки'
+        is_gross = "до вычета налогов" if _salary["gross"] else "на руки"
         if salary_from and salary_to:
-            result_salary = f'{salary_from} - {salary_to} {currency_symbol} ({is_gross})'
+            result_salary = (
+                f"{salary_from} - {salary_to} {currency_symbol} ({is_gross})"
+            )
         elif any((salary_from, salary_to)):
             salary = salary_from or salary_to
-            result_salary = f'{salary} {currency_symbol} ({is_gross})'
+            result_salary = f"{salary} {currency_symbol} ({is_gross})"
         return result_salary
 
     @property
     def experience(self):
         """Необходимый опыт работы"""
-        return self._data.get('experience', {}).get('name')
+        return self._data.get("experience", {}).get("name")
 
     @property
     def company_title(self):
         """Название компании"""
-        return self._data.get('employer', {}).get('name')
+        return self._data.get("employer", {}).get("name")
 
     @property
     def requirements(self):
         """Требования к вакансии"""
-        snippet = self._data.get('snippet') or {}
-        requirements = snippet.get('requirement', '')
+        snippet = self._data.get("snippet") or {}
+        requirements = snippet.get("requirement", "")
         return extract_text_from_html(requirements)
 
     @property
     def responsibilities(self):
         """Задачи (что нужно будет делать)"""
-        snippet = self._data.get('snippet') or {}
-        responsibilities = snippet.get('responsibility', '')
+        snippet = self._data.get("snippet") or {}
+        responsibilities = snippet.get("responsibility", "")
         return extract_text_from_html(responsibilities)
 
     @property
     def location(self):
         """Примерный адрес вакансии"""
-        return self._data.get('area').get('name')
+        return self._data.get("area").get("name")
 
     @property
     def url(self):
         """Урл вакансии"""
-        return self._data.get('alternate_url')
+        return self._data.get("alternate_url")
 
     @property
     def published_at(self):
         """Дата публикации"""
-        _published_at = self._data.get('published_at')
+        _published_at = self._data.get("published_at")
         datetime_obj = datetime.fromisoformat(_published_at)
         return datetime(
             year=datetime_obj.year,

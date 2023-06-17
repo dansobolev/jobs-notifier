@@ -1,6 +1,6 @@
 """Загрузчик вакансий с HH по API"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 import schedule
 import time
@@ -27,7 +27,7 @@ def vacancy_loader_job():
         vacancy_entity = vacancy_processor.do_process()
         tg_bot.send_vacancy_message(vacancy_entity)
         time.sleep(1)
-        print('Вакансия обработана')
+        print("Вакансия обработана")
 
 
 # schedule.every(1).minutes.do(vacancy_loader_job)

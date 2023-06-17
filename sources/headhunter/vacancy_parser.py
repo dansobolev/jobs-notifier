@@ -1,6 +1,6 @@
 """Загрузка и обработка данных с источника HeadHunter"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 from sources.base.json_parser import JSONParser
 

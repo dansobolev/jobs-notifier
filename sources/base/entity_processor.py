@@ -1,6 +1,6 @@
 """Базовый процессор для сущности"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 from dataclasses import dataclass
 from typing import Any, Type

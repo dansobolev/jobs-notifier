@@ -1,6 +1,6 @@
 """Базовая модель вакансии"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 from abc import ABC, abstractmethod
 from typing import Any, Dict
@@ -26,18 +26,18 @@ class BaseVacancyModel(BaseEntityModel):
 
     _source_id: int = NotImplemented
     _fields = (
-        'title',
-        'schedule',
-        'employment',
-        'salary',
-        'experience',
-        'company_title',
-        'requirements',
-        'responsibilities',
-        'location',
-        'url',
-        'published_at',
-        'source_name',
+        "title",
+        "schedule",
+        "employment",
+        "salary",
+        "experience",
+        "company_title",
+        "requirements",
+        "responsibilities",
+        "location",
+        "url",
+        "published_at",
+        "source_name",
     )
 
     def __init__(self, data: Dict[str, Any]):

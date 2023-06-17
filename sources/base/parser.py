@@ -1,13 +1,12 @@
 """Базовый парсер для сущностей со сторонних источников"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 
 
 class Parser(ABC):
-
     def __init__(self, extra: Optional[Dict[str, Any]] = None):
         self._extra = extra or {}
 

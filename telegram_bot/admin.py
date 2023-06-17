@@ -1,6 +1,6 @@
 """Админка с телеграм ботом"""
 
-__author__ = 'dd.sobolev'
+__author__ = "dd.sobolev"
 
 
 # TODO:
